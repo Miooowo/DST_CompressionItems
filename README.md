@@ -10,6 +10,10 @@
 该模组对常用物品进行了压缩存储，比起原版物品拥有更高的效益。
 
 
+# 在Steam上订阅！
+[压缩物品](https://steamcommunity.com/sharedfiles/filedetails/?id=3274583874)
+
+
 # 目录结构描述
     ├── ReadMe.md           // 帮助文档
     
