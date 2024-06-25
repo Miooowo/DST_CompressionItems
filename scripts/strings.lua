@@ -1,0 +1,24 @@
+local STRINGS = GLOBAL.STRINGS
+
+STRINGS.UI.CRAFTING_FILTERS.CPITEMS="压缩物品"--制作栏的名字，鼠标放上去会显示
+
+-- 压缩采下的草
+STRINGS.RECIPE_DESC.CP_CUTGRASS = "哦，这是压缩的采下的草" -- 物体的制作栏描述
+STRINGS.NAMES.CP_CUTGRASS = "压缩采下的草" --物品名称
+
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CP_CUTGRASS = "割下来的草，一种压缩工艺，可用于制作和合成其他耐久更高的东西。" 
+STRINGS.CHARACTERS.WALTER.DESCRIBE.CP_CUTGRASS  = "如果削薄一点就可以用它来吹口哨！"
+STRINGS.CHARACTERS.WURT.DESCRIBE.CP_CUTGRASS	= "它是我的重剑了。" -- its my epee now
+
+
+
+
+
+
+
+-- 压缩树枝
+STRINGS.RECIPE_DESC.CP_TWIGS = "哦，这是压缩的树枝" -- 物体的制作栏描述
+STRINGS.NAMES.CP_TWIGS = "压缩树枝" --物品名称
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CP_TWIGS = "一篮小树枝。"
+STRINGS.CHARACTERS.WURT.DESCRIBE.CP_TWIGS = "一篮木棍，浮浪噗。"
+
