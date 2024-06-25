@@ -13,11 +13,20 @@
 # 在Steam上订阅！
 [压缩物品](https://steamcommunity.com/sharedfiles/filedetails/?id=3274583874)
 
+# 修改和分发许可
+根据[GPL 3.0协议](LICENSE)，用户可以自由地修改和分发你的软件，如果用户A对本模组进行了修改并想要分发，他们必须：
+
+- 公开源代码：提供修改后模组的源代码。
+- 保留许可证：在修改后的模组中保留原有的GPL 3.0许可证声明，并确保新的修改部分也受GPL 3.0的约束。
+- 无附加限制：不能增加任何限制条件，影响其他人使用、修改和分发修改后的模组。
+- 声明修改：在分发的版本中添加一个声明，说明这个版本是基于本模组进行了修改。
+- 提供专利许可：如果用户A持有任何与修改后模组相关的专利，他们必须同意让这些专利在GPL 3.0许可下免费使用。
+
 
 # 目录结构描述
-    ├── ReadMe.md           // 帮助文档
+    ├── ReadMe.md               // 帮助文档
     
-    ├── LICENSE    // 协议
+    ├── LICENSE                // 协议
     
     ├── modinfo.lua            // modinfo内设置模组配置项，存放基础的模组信息
 
@@ -25,15 +34,15 @@
 
     ├── scripts              // scripts文件夹存放诸如prefabs、language等脚本配置
     
-    │   ├── strings.lua    //strings是字符串文档，定义如物品名称和检查台词等，之后也许会把台词单独分离出来
+    │   ├── strings.lua      //strings是字符串文档，定义如物品名称和检查台词等，之后也许会把台词单独分离出来
 
-    │   ├── recipes.lua    //recipes是配方文档，定义了各物品的基础配方
+    │   ├── recipes.lua      //recipes是配方文档，定义了各物品的基础配方
 
-    │   ├── sound          //sound文件夹存放音效、声音
+    │   ├── sound            //sound文件夹存放音效、声音
 
     │       └── common.fsb     
     
-    │   ├── prefabs        //prefabs文件夹存放设置的预制物
+    │   ├── prefabs          //prefabs文件夹存放设置的预制物
     
     │       ├── cp_twigs.lua
 
