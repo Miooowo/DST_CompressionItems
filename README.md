@@ -2,7 +2,7 @@
 选择你要阅读的文本语言<br>Select the language of the text you want to read  
 - English
   
-- [简体中文](DST_CompressionItems/README.md)
+- [简体中文](README.md)
 
 
 # 模组介绍
