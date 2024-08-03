@@ -5,8 +5,8 @@ local function translate(language_table)  -- 使用这个fn可以根据表中的
 	return language_table[L] or language_table.en
 end
 
-name = translate({en = "[CPitems]Compression items", zh = "压缩物品"}) --Mod名字
-version ="0.0.1" --Mod版本，可以自由设定任何值，但如果要更新自己的Mod，就必须和已经上传的Mod版本有差别
+name = translate({en = "[CPitems]Compression items", zh = "[CPitems]压缩物品"}) --Mod名字
+version ="0.3.1-test" --Mod版本，可以自由设定任何值，但如果要更新自己的Mod，就必须和已经上传的Mod版本有差别
 description = translate({
 	en = "󰀤version:"..version.."\n"..
 [[
@@ -18,6 +18,10 @@ description = translate({
 [[
 	不知道你是否觉得游戏原版的堆叠上限太小󰀞，又不习惯用扩大堆叠数的模组󰀯，压缩物品就是为此而生的！󰀐
 	󰀏该模组对常用物品进行了压缩存储，比起原版物品拥有更高的效益。󰀫
+	7月10日更新：压缩火把，压缩伯尼，压缩打火机
+	已知bug：压缩火把无法投掷，压缩伯尼和压缩火把没有手持贴图
+	7月1日更新：更新压缩木头，压缩警钟，压缩弹弓以及压缩弹药
+	看比较多的人对这个感觉比较新鲜，我就提前放一波更新，有bug再修。󰀤
 ]], --Mod介绍
 })
 author = "󰀍Mio󰀍" --Mod作者
@@ -28,6 +32,7 @@ dst_compatible = true --用于判定是否和饥荒联机版兼容
 dont_starve_compatible = false
 reign_of_giants_compatible = false --这两行用于判定是否和饥荒单机版兼容
 all_clients_require_mod = true --要求所有客户端都下载此Mod
+priority = -20488
 
 icon_atlas = "modicon.xml" --Mod的图标xml文档路径，需要有对应文件存在，否则Mod图标会显示为空白
 icon = "modicon.tex" --Mod图标文件名称
@@ -70,6 +75,39 @@ configuration_options =
 		},
         default = translate({en = "en", zh = "chs", }),
     },
+	{
+		name = "CP_START",
+		label = translate({en = "Compression Start", zh="压缩开局", }),
+		hover = translate({
+			en = "Give u compressed items when u born.\n its op!!!",
+			zh = "角色出生自带压缩物品\n（超模选项）", 
+			}),
+		options =
+		{
+		    {description = translate({
+				en = "YES",
+				zh = "是",
+				}), 
+				hover = translate({
+					en = "its op, r u sure? ",
+					zh = "这很超模，不建议开", 
+					}),
+				data = "true",
+			},
+			{description = translate({
+				en = "NO",
+				zh = "否",
+				}),
+				hover = translate({
+					en = "its ok, im sure. ",
+					zh = "没事，慢慢肝就行", 
+					}),
+				data = "false",
+			},
+		},
+		default = "false"
+	},
+	
 }
 -- wordshop = 2427481232 错误追踪
 bugtracker_config = {
