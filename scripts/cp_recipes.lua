@@ -77,6 +77,8 @@ local cpitemsrecipe={
 "cp_log",
 "cp_boards",
 "cp_flint",
+"cp_goldnugget",
+"cp_lucky_goldnugget",
 "cp_pocketwatch_weapon",
 "cp_slingshot",
 "cp_slingshotammo_rock",
@@ -145,6 +147,10 @@ Recipe2("cp_twigs", {Ingredient("twigs", 40)}, TECH.NONE, {atlas = "images/cp_tw
 Recipe2("cp_log", {Ingredient("log", 40)}, TECH.NONE, {atlas = "images/cp_log.xml",image = "cp_log.tex",})
 -- 压缩燧石
 Recipe2("cp_flint", {Ingredient("flint", 40)}, TECH.NONE, {atlas = "images/cp_flint.xml",image = "cp_flint.tex",})
+-- 压缩金块
+Recipe2("cp_goldnugget", {Ingredient("goldnugget", 40)}, TECH.SCIENCE_TWO, {atlas = "images/cp_goldnugget.xml",image = "cp_goldnugget.tex",})
+-- 压缩幸运黄金
+Recipe2("cp_lucky_goldnugget", {Ingredient("lucky_goldnugget", 40)}, TECH.SCIENCE_TWO, {atlas = "images/cp_lucky_goldnugget.xml",image = "cp_lucky_goldnugget.tex",})
 -----------------------------
 --refined materials--精炼材料
 -----------------------------
@@ -160,8 +166,6 @@ Recipe2("cp_boards", {Ingredient("cp_log", 4,"images/cp_log.xml")}, TECH.SCIENCE
 -- 压缩火把
 Recipe2("cp_torch", {Ingredient("cp_cutgrass", 2, "images/cp_cutgrass.xml"), Ingredient("cp_twigs", 2, "images/cp_twigs.xml")}, TECH.NONE,
 {atlas = "images/cp_torch.xml",image = "cp_torch.tex",})
-
-
 
 --------------------------------
 --WILSON TRANSMUTATION--威吊转化

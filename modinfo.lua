@@ -6,7 +6,7 @@ local function translate(language_table)  -- 使用这个fn可以根据表中的
 end
 
 name = translate({en = "[CPitems]Compression items", zh = "[CPitems]压缩物品"}) --Mod名字
-version ="0.3.1-test" --Mod版本，可以自由设定任何值，但如果要更新自己的Mod，就必须和已经上传的Mod版本有差别
+version ="0.3.2-test" --Mod版本，可以自由设定任何值，但如果要更新自己的Mod，就必须和已经上传的Mod版本有差别
 description = translate({
 	en = "󰀤version:"..version.."\n"..
 [[
