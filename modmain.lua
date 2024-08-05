@@ -7,6 +7,7 @@ GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL,
 local TheInput = GLOBAL.TheInput
 local require = GLOBAL.require
 local Recipe2 = GLOBAL.Recipe2
+local Vector3 = GLOBAL.Vector3
 io      = GLOBAL.io
 assert  = GLOBAL.assert
 rawget  = GLOBAL.rawget
@@ -18,6 +19,7 @@ GLOBAL.BaseDamge = WANDA_DAMAGE * 40
 GLOBAL.DepletedDamge = WANDA_DAMAGE * 32
 
 PrefabFiles = {
+	--"sacred_chest",
 	"cp_cutgrass",
 	"cp_twigs",
 	"cp_log",
@@ -31,6 +33,7 @@ PrefabFiles = {
 	"cp_bernie_active",
 	"cp_bernie_big",
 	"cp_lighter",
+	"cp_goldnugget",
 	--"medal_fish",
 	--"cp_punchingbag",
 }
@@ -55,27 +58,8 @@ AddComponentPostInit("stackable", function(self)
 	self.SetIgnoreMaxSize = function() end
 end)
 ]]
---[[
-local speech = {
-	--"cp_speech_walter",
-	--"cp_speech_wanda",
-	--"cp_speech_warly",
-	--"cp_speech_wathgrithr",
-	--"cp_speech_waxwell",
-	--"cp_speech_webber",
-	--"cp_speech_wendy",
-	--"cp_speech_wickerbottom",
-	--"cp_speech_willow",
-	"cp_speech_wilson",
-	--"cp_speech_winona",
-	--"cp_speech_wolfgang",
-	--"cp_speech_woodie",
-	--"cp_speech_wormwood",
-	--"cp_speech_wortox",
-	--"cp_speech_wurt",
-	--"cp_speech_wx78",
-}
-]]
+
+
 --[[
 health, sanityaura, damage, stacksize, finiteuses, waterproofer, dapperness, sewable
 perishable, hungervalue, planardamage, weapondamage, armor, insulator, fueledrate, fueltype and speed
@@ -88,7 +72,7 @@ local language = GetModConfigData("Language")---获取配置
 if language == "en" then
 	modimport("scripts/language/en.lua")
 elseif language == "chs" then
-    modimport("scripts/strings.lua")
+    modimport("scripts/cp_strings.lua")
 	--STRINGS.CHARACTERS.WILLOW = require "cp_speech_willow"
 end
 -- 开局物品
@@ -143,4 +127,5 @@ if cpstart == "true" then
 
 	AddPrefabPostInit("world", ListenForPlayers)
 end
+
 
