@@ -34,6 +34,7 @@ PrefabFiles = {
 	"cp_bernie_big",
 	"cp_lighter",
 	"cp_goldnugget",
+	"cp_spear_wathgrithr",
 	--"medal_fish",
 	--"cp_punchingbag",
 }
@@ -66,6 +67,7 @@ perishable, hungervalue, planardamage, weapondamage, armor, insulator, fueledrat
 ]]
 if not GLOBAL.TUNING.dataset then GLOBAL.TUNING.dataset = {} end
 GLOBAL.TUNING.dataset.cp_bernie_inactive = { dapperness = 1.2 , sewable = true, insulator = 2400, fueledmax=2400*40, fueledrate=0.33333333333333, fueledtype1="USAGE"}
+GLOBAL.TUNING.dataset.cp_pocketwatch_weapon = { weapondamage = 81.6*40 }
 --GLOBAL.TUNING.dataset.newprefabnameitem2 = { 武器伤害 = 99, 护甲 = 99 }
 -- 翻译配置
 local language = GetModConfigData("Language")---获取配置
@@ -91,8 +93,10 @@ if cpstart == "true" then
 			elseif character == "willow" then
 				table.insert(start_items, "cp_lighter")
 				table.insert(start_items, "cp_bernie_inactive")
-			--elseif character == "wendy" then
-				--table.insert(start_items, "abigail_flower")
+			elseif character == "wanda" then
+				table.insert(start_items, "pocketwatch_parts",3*40)
+			elseif character == "walter" then
+				table.insert(start_items, "cp_slingshot")
 			-- 其他角色的物品分配
 			-- elseif character == "其他角色名称" then
 			--     table.insert(start_items, "相应物品名称")
