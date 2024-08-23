@@ -2,17 +2,23 @@ local assets_basic =
 {
     Asset("ANIM", "anim/spear_wathgrithr.zip"),
     Asset("ANIM", "anim/swap_spear_wathgrithr.zip"),
+    Asset("ATLAS", "images/cp_spear_wathgrithr.xml"),  -- XML文件
+	Asset("IMAGE", "images/cp_spear_wathgrithr.tex")
 }
 
 local assets_lightning =
 {
     Asset("ANIM", "anim/spear_wathgrithr_lightning.zip"),
+    Asset("ATLAS", "images/cp_spear_wathgrithr_lightning.xml"),  -- XML文件
+	Asset("IMAGE", "images/cp_spear_wathgrithr_lightning.tex")
 }
 
 local assets_lightning_charged =
 {
     Asset("ANIM", "anim/spear_wathgrithr_lightning.zip"),
     Asset("INV_IMAGE", "itemtile_lightning"),
+    Asset("ATLAS", "images/cp_spear_wathgrithr_lightning_charged.xml"),  -- XML文件
+	Asset("IMAGE", "images/cp_spear_wathgrithr_lightning_charged.tex")
 }
 
 local assets_lightning_lunge_fx =
@@ -30,7 +36,7 @@ local prefabs_lightning =
     "reticuleline",
     "reticulelineping",
     "spear_wathgrithr_lightning_lunge_fx",
-    "spear_wathgrithr_lightning_charged",
+    "cp_spear_wathgrithr_lightning_charged",
 }
 
 local prefabs_lightning_charged =
@@ -88,6 +94,9 @@ local function Lightning_CanElectrocuteTarget(inst, target)
         target:GetIsWet()
 end
 
+local SPEED_MULTIPLIER = 8 -- 速度倍率
+local SOURCE_KEY = "weapon_speed_boost" -- 来源标识符
+
 local function OnEquip(inst, owner)
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
@@ -112,6 +121,10 @@ local function OnEquip(inst, owner)
         inst.components.rechargeable:Discharge(inst._cooldown)
     end
 
+    --if owner.components.locomotor then
+        --owner.components.locomotor:SetExternalSpeedMultiplier(inst, SOURCE_KEY, SPEED_MULTIPLIER)
+    --end
+
     if inst.fx ~= nil then
         inst:SetFxOwner(owner)
 
@@ -130,6 +143,10 @@ local function OnUnequip(inst, owner)
     local skin_build = inst:GetSkinBuild()
     if skin_build ~= nil then
         owner:PushEvent("unequipskinneditem", inst:GetSkinName())
+    end
+
+    if owner.components.locomotor then
+        owner.components.locomotor:RemoveExternalSpeedMultiplier(inst, SOURCE_KEY)
     end
 
 	WatchSkillRefresh(inst, nil)
@@ -176,7 +193,7 @@ local function Lightning_OnLungedHit(inst, doer, target)
         doer.IsValidVictim ~= nil and
         doer.IsValidVictim(target)
     then
-        inst.components.finiteuses:Repair(TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LUNGE_REPAIR_AMOUNT)
+        inst.components.finiteuses:Repair(TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LUNGE_REPAIR_AMOUNT*40)
         inst._lunge_hit_count = inst._lunge_hit_count + 1
     end
 end
@@ -237,7 +254,7 @@ local function Lightning_OnUpgraded(inst, upgrader, item)
     if skin_build == nil or skin_build == "" or skin_id == 0 then
         skin_build, skin_id = nil, nil
     end
-    local spear = SpawnPrefab("spear_wathgrithr_lightning_charged", skin_build, skin_id)
+    local spear = SpawnPrefab("cp_spear_wathgrithr_lightning_charged", skin_build, skin_id)
 
     spear.components.rechargeable:Discharge(spear._cooldown)
     spear.components.rechargeable:SetPercent(inst.components.rechargeable:GetPercent())
@@ -366,6 +383,8 @@ local function CommonFn(data)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.imagename = data.imagename
+	inst.components.inventoryitem.atlasname = data.atlasname
 
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(data.damage)
@@ -399,9 +418,11 @@ local function BasicSpearFn()
         build = "swap_spear_wathgrithr",
         swapbuild  = "swap_spear_wathgrithr",
         swapsymbol = "swap_spear_wathgrithr",
-        damage = TUNING.WATHGRITHR_SPEAR_DAMAGE,
+        damage = TUNING.WATHGRITHR_SPEAR_DAMAGE*40,
         planardamage = nil,
-        uses   = TUNING.WATHGRITHR_SPEAR_USES,
+        uses   = TUNING.WATHGRITHR_SPEAR_USES*40,
+        imagename = "cp_spear_wathgrithr",
+	    atlasname = "images/cp_spear_wathgrithr.xml",
     })
 end
 
@@ -449,22 +470,22 @@ local function LightningSpearCommonFn_Charged(inst)
 end
 
 local function LightningSpearPostInitFn_Base(inst)
-    inst.scrapbook_weapondamage = { TUNING.SPEAR_WATHGRITHR_LIGHTNING_DAMAGE, TUNING.SPEAR_WATHGRITHR_LIGHTNING_DAMAGE * (1 + TUNING.SPEAR_WATHGRITHR_LIGHTNING_WET_DAMAGE_MULT) }
+    inst.scrapbook_weapondamage = { TUNING.SPEAR_WATHGRITHR_LIGHTNING_DAMAGE*40, TUNING.SPEAR_WATHGRITHR_LIGHTNING_DAMAGE*40 * (1 + TUNING.SPEAR_WATHGRITHR_LIGHTNING_WET_DAMAGE_MULT*40) }
 
     inst.CanElectrocuteTarget = Lightning_CanElectrocuteTarget
 
     inst.is_lightning_spear = true
-    inst._cooldown = TUNING.SPEAR_WATHGRITHR_LIGHTNING_LUNGE_COOLDOWN
+    inst._cooldown = TUNING.SPEAR_WATHGRITHR_LIGHTNING_LUNGE_COOLDOWN / 40
 
     inst.components.weapon:SetOnAttack(Lightning_OnAttack)
-    inst.components.weapon:SetElectric(1, TUNING.SPEAR_WATHGRITHR_LIGHTNING_WET_DAMAGE_MULT)
+    inst.components.weapon:SetElectric(1, TUNING.SPEAR_WATHGRITHR_LIGHTNING_WET_DAMAGE_MULT*40)
 
     inst.components.aoetargeting:SetEnabled(false)
 
     inst:AddComponent("aoeweapon_lunge")
-    inst.components.aoeweapon_lunge:SetDamage(TUNING.SPEAR_WATHGRITHR_LIGHTNING_LUNGE_DAMAGE)
+    inst.components.aoeweapon_lunge:SetDamage(TUNING.SPEAR_WATHGRITHR_LIGHTNING_LUNGE_DAMAGE*40)
     inst.components.aoeweapon_lunge:SetSound("meta3/wigfrid/spear_lighting_lunge")
-    inst.components.aoeweapon_lunge:SetSideRange(1)
+    inst.components.aoeweapon_lunge:SetSideRange(1*40)
     inst.components.aoeweapon_lunge:SetOnLungedFn(Lightning_OnLunged)
     inst.components.aoeweapon_lunge:SetOnHitFn(Lightning_OnLungedHit)
     inst.components.aoeweapon_lunge:SetStimuli("electric")
@@ -495,7 +516,7 @@ local function LightningSpearPostInitFn_Charged(inst)
 
     inst.scrapbook_tex = "spear_wathgrithr_lightning_charged"
 
-    inst._cooldown = TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LUNGE_COOLDOWN
+    inst._cooldown = TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LUNGE_COOLDOWN / 40
 
     inst.SetFxOwner = LightningCharged_SetFxOwner
     inst.OnStopFloating = LightningCharged_OnStopFloating
@@ -516,7 +537,7 @@ local function LightningSpearPostInitFn_Charged(inst)
     inst.components.inventoryitem:ChangeImageName("spear_wathgrithr_lightning")
 
     inst.components.equippable.restrictedtag = UPGRADETYPES.SPEAR_LIGHTNING.."_upgradeuser"
-    inst.components.equippable.walkspeedmult = TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_SPEED_MULT
+    inst.components.equippable.walkspeedmult = TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_SPEED_MULT * 2
 
     inst.components.floater:SetSwapData(SPEAR_LIGHTNING_CHARGED_SWAP_DATA)
 
@@ -533,11 +554,13 @@ local function LightningSpearFn()
         build = "spear_wathgrithr_lightning",
         swapbuild  = "spear_wathgrithr_lightning",
         swapsymbol = "swap_spear_wathgrithr_lightning",
-        damage = TUNING.SPEAR_WATHGRITHR_LIGHTNING_DAMAGE,
+        damage = TUNING.SPEAR_WATHGRITHR_LIGHTNING_DAMAGE*40,
         planardamage = nil,
-        uses = TUNING.SPEAR_WATHGRITHR_LIGHTNING_USES,
+        uses = TUNING.SPEAR_WATHGRITHR_LIGHTNING_USES*40,
         commonfn   = LightningSpearCommonFn_Normal,
         postinitfn = LightningSpearPostInitFn_Normal,
+        imagename = "cp_spear_wathgrithr_lightning",
+	    atlasname = "images/cp_spear_wathgrithr_lightning.xml",
     })
 end
 
@@ -547,11 +570,13 @@ local function LightningSpearChargedFn()
         build = "spear_wathgrithr_lightning",
         swapbuild  = "spear_wathgrithr_lightning",
         swapsymbol = "swap_spear_wathgrithr_lightning",
-        damage = TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_DAMAGE,
-        planardamage = TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_PLANAR_DAMAGE,
-        uses = TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_USES,
+        damage = TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_DAMAGE*40,
+        planardamage = TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_PLANAR_DAMAGE*40,
+        uses = TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_USES*40,
         commonfn   = LightningSpearCommonFn_Charged,
         postinitfn = LightningSpearPostInitFn_Charged,
+        imagename = "cp_spear_wathgrithr_lightning_charged",
+	    atlasname = "images/cp_spear_wathgrithr_lightning_charged.xml",
     })
 end
 
@@ -671,8 +696,8 @@ end
 
 
 return
-        Prefab("spear_wathgrithr",                      BasicSpearFn,            assets_basic                                             ),
-        Prefab("spear_wathgrithr_lightning",            LightningSpearFn,        assets_lightning,              prefabs_lightning         ),
-        Prefab("spear_wathgrithr_lightning_charged",    LightningSpearChargedFn, assets_lightning_charged,      prefabs_lightning_charged ),
-        Prefab("spear_wathgrithr_lightning_lunge_fx",   LungueTrailFxFn,         assets_lightning_lunge_fx                                ),
-        Prefab("spear_wathgrithr_lightning_fx",         FxFn,                    assets_lightning_fx                                      )
+        Prefab("cp_spear_wathgrithr",                      BasicSpearFn,            assets_basic                                             ),
+        Prefab("cp_spear_wathgrithr_lightning",            LightningSpearFn,        assets_lightning,              prefabs_lightning         ),
+        Prefab("cp_spear_wathgrithr_lightning_charged",    LightningSpearChargedFn, assets_lightning_charged,      prefabs_lightning_charged ),
+        Prefab("cp_spear_wathgrithr_lightning_lunge_fx",   LungueTrailFxFn,         assets_lightning_lunge_fx                                ),
+        Prefab("cp_spear_wathgrithr_lightning_fx",         FxFn,                    assets_lightning_fx                                      )

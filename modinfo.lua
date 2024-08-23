@@ -6,7 +6,7 @@ local function translate(language_table)  -- 使用这个fn可以根据表中的
 end
 
 name = translate({en = "[CPitems]Compression items", zh = "[CPitems]压缩物品"}) --Mod名字
-version ="0.3.2-test" --Mod版本，可以自由设定任何值，但如果要更新自己的Mod，就必须和已经上传的Mod版本有差别
+version ="0.4.0" --Mod版本，可以自由设定任何值，但如果要更新自己的Mod，就必须和已经上传的Mod版本有差别
 description = translate({
 	en = "󰀤version:"..version.."\n"..
 [[
@@ -20,6 +20,7 @@ description = translate({
 	󰀏该模组对常用物品进行了压缩存储，比起原版物品拥有更高的效益。󰀫
 
 	更新日志：
+	8月23日更新：制作压缩战斗长矛，压缩奔雷矛
 	8月5日更新：压缩金块，压缩幸运黄金
 	7月10日更新：压缩火把，压缩伯尼，压缩打火机
 	已知bug：压缩火把无法投掷，压缩伯尼和压缩火把没有手持贴图

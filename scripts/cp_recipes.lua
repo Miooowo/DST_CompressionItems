@@ -89,12 +89,22 @@ local cpitemsrecipe={
 "cp_slingshotammo_slow",
 "cp_slingshotammo_poop",
 "cp_trinket_1",
+"cp_slingshotammo_rock2",
+"cp_slingshotammo_gold2",
+"cp_slingshotammo_marble2",
+"cp_slingshotammo_thulecite2",
+"cp_slingshotammo_freeze2",
+"cp_slingshotammo_slow2",
+"cp_slingshotammo_poop2",
+"cp_trinket_1_2",
 "cp_torch",
 "cp_lighter",
 "cp_bernie_inactive",
 "transmute_trinket_1",
 "cp_transmute_trinket_1",
 "cp_walter_transmute_trinket_1",
+"cp_spear_wathgrithr",
+"cp_spear_wathgrithr_lightning",
 --"cp_pocketwatch_weapon",
 }
 
@@ -109,11 +119,22 @@ local CHARACTER_cpitemsrecipe={
 "cp_slingshotammo_freeze",
 "cp_slingshotammo_slow",
 "cp_slingshotammo_poop",
+"cp_trinket_1",
+"cp_slingshotammo_rock2",
+"cp_slingshotammo_gold2",
+"cp_slingshotammo_marble2",
+"cp_slingshotammo_thulecite2",
+"cp_slingshotammo_freeze2",
+"cp_slingshotammo_slow2",
+"cp_slingshotammo_poop2",
+"cp_trinket_1_2",
 "cp_lighter",
 "cp_bernie_inactive",
 "transmute_trinket_1",
 "cp_transmute_trinket_1",
 "cp_walter_transmute_trinket_1",
+"cp_spear_wathgrithr",
+"cp_spear_wathgrithr_lightning",
 --"cp_pocketwatch_weapon",
 }
 -- 创建一个表来快速查找 CHARACTER_cpitemsrecipe 中的配方
@@ -217,6 +238,34 @@ Recipe2("cp_slingshotammo_thulecite",{Ingredient("thulecite_pieces", 1*40), Ingr
 Recipe2("cp_trinket_1",{Ingredient("trinket_1", 1*40)}, TECH.SCIENCE_ONE,
 {atlas = "images/cp_ammo.xml", image = "cp_trinket_1.tex",builder_tag="pebblemaker", numtogive = 10, no_deconstruction=true})
 
+--原版弹药合成压缩弹药
+Recipe2("cp_slingshotammo_rock2",{Ingredient("slingshotammo_rock", 1*400)},TECH.NONE,
+{product="cp_slingshotammo_rock", atlas = "images/cp_ammo.xml", image = "cp_slingshotammo_rock.tex",builder_tag="pebblemaker", 
+description="cp_slingshotammo_rock", numtogive = 10, no_deconstruction=true, })
+
+Recipe2("cp_slingshotammo_gold2",{Ingredient("slingshotammo_gold", 1*400)},TECH.SCIENCE_ONE,
+{product="cp_slingshotammo_gold", atlas = "images/cp_ammo.xml", image = "cp_slingshotammo_gold.tex",builder_tag="pebblemaker", 
+description="cp_slingshotammo_gold", numtogive = 10, no_deconstruction=true, })
+
+Recipe2("cp_slingshotammo_marble2",{Ingredient("slingshotammo_marble", 1*400)},TECH.SCIENCE_TWO,
+{product="cp_slingshotammo_marble", atlas = "images/cp_ammo.xml", image = "cp_slingshotammo_marble.tex",builder_tag="pebblemaker", 
+description="cp_slingshotammo_marble", numtogive = 10, no_deconstruction=true, })
+
+Recipe2("cp_slingshotammo_poop2",{Ingredient("lingshotammo_poop", 1*400)},TECH.SCIENCE_ONE,
+{product="cp_slingshotammo_poop", atlas = "images/cp_ammo.xml", image = "cp_slingshotammo_poop.tex",builder_tag="pebblemaker", 
+description="cp_slingshotammo_poop", numtogive = 10, no_deconstruction=true, })
+
+Recipe2("cp_slingshotammo_freeze2",{Ingredient("slingshotammo_freeze", 1*400)},TECH.MAGIC_TWO,	
+{product="cp_slingshotammo_freeze", atlas = "images/cp_ammo.xml", image = "cp_slingshotammo_freeze.tex",builder_tag="pebblemaker", 
+description="cp_slingshotammo_freeze", numtogive = 10, no_deconstruction=true, })
+
+Recipe2("cp_slingshotammo_slow2",{Ingredient("slingshotammo_slow", 1*400)},TECH.MAGIC_THREE,
+{product="cp_slingshotammo_slow", atlas = "images/cp_ammo.xml", image = "cp_slingshotammo_slow.tex",builder_tag="pebblemaker", 
+description="cp_slingshotammo_slow", numtogive = 10, no_deconstruction=true, })
+
+Recipe2("cp_slingshotammo_thulecite2",{Ingredient("slingshotammo_thulecite", 1*400)}, TECH.ANCIENT_TWO,
+{product="cp_slingshotammo_thulecite", atlas = "images/cp_ammo.xml", image = "cp_slingshotammo_thulecite.tex",builder_tag="pebblemaker", 
+description="cp_slingshotammo_thulecite", numtogive = 10, no_deconstruction=true, nounlock=true})
 --------------------------------
 --WILLOW-----------------薇洛专属
 --------------------------------
@@ -227,7 +276,19 @@ Recipe2("cp_bernie_inactive", {Ingredient("beardhair", 2*40), Ingredient("beefal
 Recipe2("cp_lighter", {Ingredient("rope", 1*40), Ingredient("goldnugget", 1*40), Ingredient("petals", 3*40)}, TECH.NONE, 
 {atlas = "images/cp_lighter.xml", image = "cp_lighter.tex",builder_tag="pyromaniac", filter = {"CHARACTER"},})
 
-
+--------------------------------
+--WATHGRITHR---------薇格弗德专属
+--------------------------------
+--压缩战斗长矛
+Recipe2("cp_spear_wathgrithr", {Ingredient("cp_twigs", 2, "images/cp_twigs.xml"), Ingredient("cp_flint", 2, "images/cp_flint.xml"), 
+Ingredient("cp_goldnugget", 2, "images/cp_goldnugget.xml")}, TECH.NONE, 
+{atlas = "images/cp_spear_wathgrithr.xml", image = "cp_spear_wathgrithr.tex", builder_tag="valkyrie", description="spear_wathgrithr", 
+filter = {"CHARACTER"},})
+--压缩奔雷矛
+Recipe2("cp_spear_wathgrithr_lightning", {Ingredient("cp_twigs", 2, "images/cp_twigs.xml"), Ingredient("lightninggoathorn", 2*40), 
+Ingredient("beefalowool", 1*40)}, TECH.NONE, 
+{atlas = "images/cp_spear_wathgrithr_lightning.xml", image = "cp_spear_wathgrithr_lightning.tex",builder_skill="wathgrithr_arsenal_spear_3", 
+description="spear_wathgrithr_lightning", filter = {"CHARACTER"},})
 --------------------------------
 --MEDAL--------------联动能力勋章
 --------------------------------
